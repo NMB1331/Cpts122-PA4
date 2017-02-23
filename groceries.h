@@ -30,7 +30,7 @@ void enqueue(struct queue *line, struct queueNode *new_node);
 void dequeue(struct queue *line);
 
 //Function that prints a queue
-void print_queue(struct queue *line);
+void print_queue(struct queue *line, struct queue *line2);
 
 //Function that simulates a person entering a line
 void add_to_line(struct queue *line, int *customer_number);

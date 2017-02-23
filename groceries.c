@@ -40,23 +40,38 @@ void dequeue(struct queue *line)
 }
 
 //Function that prints a queue
-void print_queue(struct queue *line)
+//Line1 = regular line, Line2 = express line
+void print_queue(struct queue *line1, struct queue *line2)
 {
-  if (line->head == NULL)
-  {
-    printf("EMPTY LINE\n");
-    return;
-  }
-  struct queueNode *current = line->head;
-  printf("FRONT ->\n");
-  while(current != NULL)
-  {
-    printf("  Customer number: %d\n", current->customer_number);
-    printf("  Service time: %d\n", current->service_time);
-    printf("  Total time: %d\n\n", current->total_time);
+  printf("FRONT->                   FRONT->\n");
 
-    current = current->next;
+  struct queueNode *current1 = line1->head;
+  struct queueNode *current2 = line2->head;
+  //Prints both queues side by side (to look like lines next to each other)
+  while(current1 != NULL && current2 != NULL)
+  {
+    printf("  Reg Customer number: %d    Exp Customer number: %d\n", current1->customer_number, current2->customer_number);
+    printf("  Service time: %d           Service time: %d\n", current1->service_time, current2->service_time);
+    printf("  Total time: %d             Total time: %d\n\n", current1->total_time, current2->total_time);
+
+    current1 = current1->next;
+    current2 = current2->next;
   }
+
+  //Handles cases where 1 line is longer than the other
+  if (current1 != NULL && current2 == NULL)
+  {
+    printf("  Customer number: %d\n", current1->customer_number);
+    printf("  Service time: %d\n", current1->service_time);
+    printf("  Total time: %d\n\n", current1->total_time);
+  }
+  if (current2 != NULL && current1 == NULL)
+  {
+    printf("                             Customer number: %d\n", current2->customer_number);
+    printf("                             Service time: %d\n", current2->service_time);
+    printf("                             Total time: %d\n\n", current2->total_time);
+  }
+
 }
 
 //Function that randomly generates a new customer_number
@@ -66,7 +81,7 @@ struct queueNode *generate_random_customer(int *cust_number)
   if (new_node != NULL)
   {
     new_node->customer_number = *cust_number;
-    new_node->service_time = rand() % 10 + 2;
+    new_node->service_time = rand() % 8 + 3;
     //new_node->total_time = current_service_time;
 
     (*cust_number)++;

@@ -46,7 +46,7 @@ int main(void)
     }
 
     //Displays the lines (only regular for now, because I'm fucking lazy)
-    print_queue(reg_head);
+    print_queue(reg_head, exp_head);
 
     //Services the person in front, pops them when they're done
     if (regular_line.head != NULL && regular_line.head->service_time == 0)
