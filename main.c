@@ -4,7 +4,7 @@
 int main(void)
 {
   //Time seeded for rand(), variables initialized
-  printf("Pointless grocery simulator. Thanks, college\n");
+  //printf("Pointless grocery simulator. Thanks, college\n");
   srand((unsigned int) (time NULL));
   Queue regular_line, express_line;
   Queue *reg_head = &regular_line, *exp_head = &express_line;
@@ -12,10 +12,13 @@ int main(void)
   int loop_counter = 0, sim_time = 0;
   int time_till_next_reg = 0, time_till_next_exp = 0, reg_diff = 0, exp_diff = 0;
 
+  //Prints the directions
+  print_instructions();
+
   //Gets the time that the simulation should last
   do
   {
-    printf("Enter how long the simulation should last (Processing times are 10 seconds or less) ");
+    printf("Enter how long the simulation should last (I recommend 100) ");
     scanf(" %d", &sim_time);
   } while(sim_time <= 0);
 
@@ -28,11 +31,11 @@ int main(void)
       //Adds customers to the line, after the randon time (above)
     if (time_till_next_reg <= 0)
     {
-      enqueue(reg_head, generate_random_customer(&customer_number));
+      enqueue(reg_head, generate_random_customer(&customer_number, REG_LINE));
     }
     if (time_till_next_exp <= 0)
     {
-      enqueue(exp_head, generate_random_customer(&customer_number));
+      enqueue(exp_head, generate_random_customer(&customer_number, EXP_LINE));
     }
 
     //Generates the times until the next customer

@@ -1,6 +1,9 @@
 #ifndef GROCERY
 #define GROCERY
 
+#define REG_LINE 1
+#define EXP_LINE 2
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -23,6 +26,9 @@ typedef struct queue
 
 }Queue;
 
+//Function that prints directions
+void print_instructions(void);
+
 //Function that adds a node to the queueNode
 void enqueue(struct queue *line, struct queueNode *new_node);
 
@@ -36,7 +42,8 @@ void print_queue(struct queue *line, struct queue *line2);
 void add_to_line(struct queue *line, int *customer_number);
 
 //Function that randomly generates a new customer_number
-struct queueNode *generate_random_customer(int *cust_number);
+//Line type 1 for regular, 2 for express
+struct queueNode *generate_random_customer(int *cust_number, int line_type);
 
 //Function that waits for a certain number of seconds
 //Courtesy of http://stackoverflow.com/questions/3930363/implement-time-delay-in-c
